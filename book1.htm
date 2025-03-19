@@ -1,0 +1,274 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Details - Rich Dad Poor Dad</title>
+    <style>
+        @keyframes starAnimation {
+            from { background-position: 0 0; }
+            to { background-position: -1000px 1000px; }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #ffffff, 0 0 10px #4CAF50, 0 0 20px #4CAF50; }
+            50% { text-shadow: 0 0 10px #ffffff, 0 0 20px #4CAF50, 0 0 30px #4CAF50; }
+            100% { text-shadow: 0 0 5px #ffffff, 0 0 10px #4CAF50, 0 0 20px #4CAF50; }
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: black;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            position: relative;
+            overflow-y: auto;
+            color: white;
+            flex-direction: column;
+            padding: 20px;
+        }
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.3;
+            animation: starAnimation 20s linear infinite;
+            z-index: -1;
+        }
+        /* Home Button */
+        .home-button {
+            position: fixed;
+            top: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+        }
+        .home-button:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+        .container {
+            position: relative;
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            padding: 25px;
+            border-radius: 15px;
+            box-shadow: 0px 5px 20px rgba(255, 255, 255, 0.2);
+            width: 90%;
+            max-width: 550px;
+            text-align: center;
+            z-index: 1;
+            margin-bottom: 20px;
+        }
+        .book-cover img {
+            width: 100%;
+            max-width: 220px;
+            border-radius: 12px;
+            transition: transform 0.3s ease;
+        }
+        .book-cover img:hover {
+            transform: scale(1.05);
+        }
+        .section {
+            margin-top: 15px;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 8px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background 0.3s ease;
+        }
+
+        .section:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+        
+        .section-content {
+            display: none;
+            background: rgba(255, 255, 255, 0.15);
+            padding: 10px;
+            border-radius: 5px;
+            color: white;
+            margin-top: 5px;
+            transition: all 0.3s ease-in-out;
+        }
+        
+        .feedback-form {
+            margin-top: 20px;
+            padding: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 10px;
+            width: 90%;
+            max-width: 550px;
+        }
+        input, textarea {
+            width: 95%;
+            padding: 10px;
+            margin-top: 5px;
+            border: 1px solid rgba(255, 255, 255, 0.5);
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 5px;
+            font-size: 14px;
+            color: white;
+        }
+        input::placeholder, textarea::placeholder {
+            color: rgba(255, 255, 255, 0.7);
+        }
+        button {
+            margin-top: 10px;
+            padding: 12px;
+            border: none;
+            background: #ff4b2b;
+            color: white;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 14px;
+            transition: background 0.3s ease;
+            width: 100%;
+        }
+        button:hover {
+            background: #ff9900;
+        }
+        .header {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: glow 2s infinite alternate;
+        }
+
+        /* Back to Top Button */
+        .back-to-top {
+            position: fixed;
+            bottom: 15px;
+            right: 15px;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 10px 20px;
+            border-radius: 8px;
+            color: rgba(255, 255, 255, 0.8);
+            text-decoration: none;
+            font-weight: bold;
+            transition: all 0.3s ease;
+            z-index: 10;
+            backdrop-filter: blur(5px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.1);
+            cursor: pointer;
+            display: none;
+        }
+        .footer {
+            margin-top: 30px;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: #4CAF50;
+            opacity: 0.8;
+            animation: glow 2s infinite alternate;
+        }
+        
+        .back-to-top:hover {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+            box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+        }
+    </style>
+</head>
+<body>
+    <a href="index.htm" class="home-button">Home</a>
+    <div class="header">Welcome to Book Store</div>
+
+    <div class="container">
+        <div class="book-cover">
+            <img src="public/images/rich-dad-poor-dad-9.jpg" alt="Rich Dad Poor Dad Book Cover">
+        </div>
+        <div class="section" onclick="toggleSection(this)">Genre</div>
+        <div class="section-content">
+            <ul>
+                <li>Self-Help</li>
+                <li>Personal Finance</li>
+                <li>Success Psychology</li>
+            </ul>
+        </div>
+        <div class="section" onclick="toggleSection(this)">Index</div>
+        <div class="section-content">
+            <ul>
+                <li><b>Robert Kiyosaki:</b> An entrepreneur, investor, and financial educator, best known for Rich Dad Poor Dad. His books focus on financial literacy and achieving financial independence.
+                </li>
+            </ul>
+        </div>
+        <div class="section" onclick="toggleSection(this)">Authors</div>
+        <div class="section-content">
+            <ul>
+                <li>Authors</li>
+                <li>Overview</li>
+                <li>Competitive Exam Relevance</li>
+            </ul>
+        </div>
+        <div class="section" onclick="toggleSection(this)">Overview</div>
+        <div class="section-content">
+            <p><b>Rich Dad Poor Dad</b> teaches how to develop financial intelligence, shift your mindset about money, and build wealth through smart investments.</p>
+        </div>
+        <div class="section" onclick="toggleSection(this)">Exam Relevance</div>
+            <div class="section-content">
+                <ul>
+                    <li><b>Interviews & Group Discussions:</b> Enhances financial understanding and decision-making skills.</li>
+                </ul>
+            </div>
+        <div class="section" onclick="toggleSection(this)">Purchase Links</div>
+        <div class="section-content">
+            <a href="https://www.amazon.in/Rich-Dad-Poor-Middle-Anniversary/dp/1612681131/">Buy on Amazon</a>
+        </div>
+    </div>
+    <div class="feedback-form">
+        <h3>Feedback Form</h3>
+        <input type="text" id="name" name="name" placeholder="Your Name">
+        <textarea id="feedback" name="feedback" rows="4" placeholder="Your Feedback"></textarea>
+        <button type="button" onclick="submitFeedback()">Submit</button>
+    </div>
+
+    <a id="backToTop" class="back-to-top">Back to Top</a>
+    <div class="footer">© 2025 All Rights Reserved.</div>
+
+    <script>
+        function toggleSection(section) {
+            var content = section.nextElementSibling;
+            content.style.display = content.style.display === "block" ? "none" : "block";
+        }
+
+        function submitFeedback() {
+            let name = document.getElementById("name").value;
+            let feedback = document.getElementById("feedback").value;
+            if (name && feedback) {
+                window.location.href = window.location.pathname + `?name=${encodeURIComponent(name)}&feedback=${encodeURIComponent(feedback)}`;
+            } else {
+                alert("Please fill out both fields.");
+            }
+        }
+
+        document.addEventListener("DOMContentLoaded", function() {
+            const backToTop = document.getElementById("backToTop");
+            window.addEventListener("scroll", function() {
+                backToTop.style.display = window.scrollY > 200 ? "block" : "none";
+            });
+            backToTop.addEventListener("click", () => window.scrollTo({ top: 0, behavior: "smooth" }));
+        });
+    </script>
+</body>
+</html>

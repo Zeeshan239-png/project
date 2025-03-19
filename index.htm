@@ -1,0 +1,177 @@
+\<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Display</title>
+    <style>
+        @keyframes starAnimation {
+            from { background-position: 0 0; }
+            to { background-position: -1000px 1000px; }
+        }
+
+        @keyframes glow {
+            0% { text-shadow: 0 0 5px #ffffff, 0 0 10px #4CAF50, 0 0 20px #4CAF50; }
+            50% { text-shadow: 0 0 10px #ffffff, 0 0 20px #4CAF50, 0 0 30px #4CAF50; }
+            100% { text-shadow: 0 0 5px #ffffff, 0 0 10px #4CAF50, 0 0 20px #4CAF50; }
+        }
+
+        body {
+            font-family: 'Poppins', sans-serif;
+            background: black;
+            margin: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            min-height: 100vh;
+            position: relative;
+            overflow-y: auto;
+            padding: 20px;
+        }
+
+        body::before {
+            content: "";
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: url('https://www.transparenttextures.com/patterns/stardust.png');
+            opacity: 0.3;
+            animation: starAnimation 20s linear infinite;
+            z-index: -1;
+        }
+
+        .header {
+            font-size: 32px;
+            font-weight: bold;
+            color: #4CAF50;
+            margin-bottom: 20px;
+            text-align: center;
+            animation: glow 2s infinite alternate;
+        }
+
+        .book-container {
+            display: flex;
+            gap: 30px;
+            flex-wrap: wrap;
+            justify-content: center;
+            padding: 20px;
+            max-width: 900px;
+        }
+
+        .book {
+            width: 180px;
+            height: 260px;
+            perspective: 1000px;
+        }
+
+        .book-inner {
+            width: 100%;
+            height: 100%;
+            position: relative;
+            transform-style: preserve-3d;
+            transition: transform 0.6s ease-in-out;
+        }
+
+        .book:hover .book-inner {
+            transform: rotateY(180deg);
+        }
+
+        .book-front, .book-back {
+            width: 100%;
+            height: 100%;
+            position: absolute;
+            backface-visibility: hidden;
+            border-radius: 12px;
+            box-shadow: 0 8px 16px rgba(255, 255, 255, 0.2);
+            overflow: hidden;
+        }
+
+        .book-front {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(8px);
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transition: all 0.3s ease-in-out;
+        }
+
+        .book-front img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 12px;
+        }
+
+        .book-back {
+            background: rgba(46, 204, 113, 0.8);
+            color: white;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            transform: rotateY(180deg);
+            font-size: 18px;
+            font-weight: bold;
+            text-align: center;
+            padding: 10px;
+            border-radius: 12px;
+        }
+
+        .book-back a {
+            color: white;
+            text-decoration: none;
+            font-size: 16px;
+            font-weight: bold;
+            padding: 8px 15px;
+            border-radius: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            transition: background 0.3s ease;
+        }
+
+        .book-back a:hover {
+            background: rgba(255, 255, 255, 0.4);
+        }
+
+        .footer {
+            margin-top: 30px;
+            padding: 10px;
+            text-align: center;
+            font-size: 14px;
+            color: #4CAF50;
+            opacity: 0.8;
+            animation: glow 2s infinite alternate;
+        }
+        
+    </style>
+</head>
+<body> 
+
+    <div class="header">Welcome to Book Store</div>
+
+    <div class="book-container">
+        <div class="book">
+            <div class="book-inner">
+                <div class="book-front"><img src="public/images/rich-dad-poor-dad-9.jpg" alt="Rich Dad Poor Dad"></div>
+                <div class="book-back"><a href="book1.htm">View Details</a></div>
+            </div>
+        </div>
+        <div class="book">
+            <div class="book-inner">
+                <div class="book-front"><img src="public/images/Zero-to-One.jpg" alt="Zero to One"></div>
+                <div class="book-back"><a href="book2.htm">View Details</a></div>
+            </div>
+        </div>
+        <div class="book">
+            <div class="book-inner">
+                <div class="book-front"><img src="public/images/millionaremind.jpg" alt="The Millionaire Mind"></div>
+                <div class="book-back"><a href="book3.htm">View Details</a></div>
+            </div>
+        </div>
+    </div>
+
+    <div class="footer">© 2025 All Rights Reserved.</div>
+
+</body>
+</html>
